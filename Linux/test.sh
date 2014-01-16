@@ -1,2 +1,0 @@
-		DEFAULTLOC=${HOME}/Dropbox
-echo $DEFAULTLOC
