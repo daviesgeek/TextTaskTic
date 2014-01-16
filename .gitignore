@@ -19,3 +19,6 @@ Thumbs.db
 views/viewCache
 sftp-config.json
 error_log
+
+# Other
+settings.cfg
