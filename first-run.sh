@@ -1,4 +1,4 @@
-echo "Initialzing setup..."
+echo "Initializing setup..."
 
 #Set check time
 echo -e "How often do you want $NAME to check (in minutes; default 5 minutes)? \n\c"
@@ -34,6 +34,7 @@ while true; do
 	fi
 done
 
-echo 'check='\"$check\" >> settings.cfg
-echo 'location='\"$loc\" >> settings.cfg
+mkdir -p ${HOME}/.$NAME
+echo 'check='\"$check\" >> "$SETTINGS"
+echo 'location='\"$loc\" >> "$SETTINGS"
 echo 'done setting up'
