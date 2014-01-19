@@ -5,38 +5,40 @@
 # Matthew Davies
 #
 ######
+source 'global.sh'
+
+# If the settings file isn't there, assume first run
+if [ ! -f "$SETTINGS" ]; then
+	echo 'Initializing setup...'
+	source setup.sh
+fi
+source "$SETTINGS"
+
 function run {
-	while true; do
-		source 'global.sh'
-		if [ ! -f "$SETTINGS" ]; then
-			source first-run.sh
-		fi
-
-		source "$SETTINGS"
-
-		# Quits all running instances of TextTaskTic
-		quit(){
-			echo 'quit function'
-		}
-
-		while getopts ":q:r:h" options; do
-			case "${options}" in
-		    q)
-					quit
-	        ;;
-		    r)
-	        r=${OPTARG}
-	        ;;
-	       h)
-					usage
-					;;
-			esac
-		done
-
-		#sleep $((check*60))
-		break
-	done
+	source 'run.sh'
 }
-run
-#run </dev/null >/dev/null 2>&1 &
-#disown
+
+function quit(){
+	echo "Quitting $NAME..."
+	kill `ps -ef | grep TextTaskTic | grep -v grep | awk '{print $2}'`
+}
+
+function reset(){
+	source 'setup.sh'
+}
+
+function help(){
+	echo "Usage for $NAME"
+}
+
+if [[ $@ =~ -q ]]; then
+	quit
+elif [[ $@ =~ -r ]]; then
+	reset
+elif [[ $@ =~ -h ]]; then
+	help	
+else
+	#run
+	run </dev/null >/dev/null 2>&1 &
+	disown	
+fi
