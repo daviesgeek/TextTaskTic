@@ -28,16 +28,16 @@ function reset(){
 }
 
 function help(){
-	echo "Usage for $NAME"
+	source 'help.sh'
 }
 
-if [[ $@ =~ -q ]]; then
+if [[ $@ =~ -q ]] || [[ $@ =~ --quit ]]; then
 	quit
-elif [[ $@ =~ -r ]]; then
+elif [[ $@ =~ -r ]] || [[ $@ =~ --reset ]]; then
 	reset
-elif [[ $@ =~ -h ]]; then
+elif [[ $@ =~ -h ]] || [[ $@ =~ --help ]] || [[ $@ =~ -? ]]; then
 	help
-elif [[ $@ =~ -1 ]]; then
+elif [[ $@ =~ -1 ]]  || [[ $@ =~ --once ]]; then
 	check=0
 	print=1
 	run
