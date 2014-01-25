@@ -31,17 +31,23 @@ function help(){
 	source 'help.sh'
 }
 
-if [[ $@ =~ -q ]] || [[ $@ =~ --quit ]]; then
+flags="${@#"${var%%[![:space:]]*}"}"
+
+if [[ $flags == '-q' ]] || [[ $flags == '--quit' ]]; then
 	quit
-elif [[ $@ =~ -r ]] || [[ $@ =~ --reset ]]; then
+elif [[ $flags == '-r' ]] || [[ $flags == '--reset' ]]; then
 	reset
-elif [[ $@ =~ -h ]] || [[ $@ =~ --help ]] || [[ $@ =~ -? ]]; then
+elif [[ $flags == '-h' ]] || [[ $flags == '--help' ]] || [[ $flags == '-?' ]]; then
 	help
-elif [[ $@ =~ -1 ]]  || [[ $@ =~ --once ]]; then
+elif [[ $flags == '-1' ]]  || [[ $flags == '--once' ]]; then
 	check=0
 	print=1
 	run
+elif [[ ! -z $flags ]]; then
+	echo 'Invalid options...'
+	help
 else
+	echo 'Running in background...'
 	run </dev/null >/dev/null 2>&1 &
 	disown	
 fi
