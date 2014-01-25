@@ -21,3 +21,9 @@ RED='\e[1;31m'
 PURPLE='\e[1;35m'
 YELLOW='\e[1;33m'
 NC='\e[0m'
+
+#Style definitions
+BOLD='\e[1m'
+UNDERLINED='\e[4m'
+INVERTED='\x1b[7m'
+PLAIN='\e[0m'
