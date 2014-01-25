@@ -24,3 +24,4 @@ error_log
 settings.cfg
 test.sh
 notes.md
+*.sublime*
