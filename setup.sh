@@ -55,4 +55,4 @@ done
 mkdir -p ${HOME}/.$NAME
 echo 'check='\"$checkRet\" >> "$SETTINGS"
 echo 'location='\"$locRet\" >> "$SETTINGS"
-echo 'Done setting up. Please re-run this script without any flags.'
+echo "Done setting up. Please re-run $NAME without any flags to start it in the background."
