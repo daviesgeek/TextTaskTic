@@ -2,7 +2,7 @@
 ######
 #
 # TextTaskTic.sh
-# Matthew Davies
+# Matthew Davies, January 16th, 2014
 #
 ######
 source 'global.sh'
@@ -36,9 +36,12 @@ if [[ $@ =~ -q ]]; then
 elif [[ $@ =~ -r ]]; then
 	reset
 elif [[ $@ =~ -h ]]; then
-	help	
+	help
+elif [[ $@ =~ -1 ]]; then
+	check=0
+	print=1
+	run
 else
-	#run
 	run </dev/null >/dev/null 2>&1 &
 	disown	
 fi

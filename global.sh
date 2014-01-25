@@ -1,6 +1,7 @@
 ######
 #
 # Global functions and variables
+# Matthew Davies, January 16th, 2014
 #
 ######
 APATH=$(pwd -P)
