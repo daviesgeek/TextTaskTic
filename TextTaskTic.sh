@@ -19,8 +19,7 @@ function run {
 }
 
 function quit(){
-	echo "Quitting $NAME..."
-	kill `ps -ef | grep TextTaskTic | grep -v grep | awk '{print $2}'`
+	source 'quit.sh'
 }
 
 function reset(){
@@ -31,7 +30,7 @@ function help(){
 	source 'help.sh'
 }
 
-flags="${@#"${var%%[![:space:]]*}"}"
+flags="${@#"${@%%[![:space:]]*}"}"
 
 if [[ $flags == '-q' ]] || [[ $flags == '--quit' ]]; then
 	quit
