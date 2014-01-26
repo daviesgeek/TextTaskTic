@@ -5,7 +5,8 @@
 #
 ######
 
-pid=`ps -ef | grep $NAME | grep -v grep | awk '{print $2}' | head -1`
+pid=$(ps -A | grep $NAME | grep -v grep | awk '{print $1}')
+pid=$(echo $pid | awk '{print $1}')
 if [[ ! -z $pid ]] && [[ ! $pid == $BASHPID ]]; then
 	echo "Quitting $NAME..."
 	kill $pid
