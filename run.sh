@@ -74,7 +74,7 @@ while true; do
 	elif [[ `uname` == 'Darwin' ]]; then
 		for t in "${taskList[@]}"; do
 			IFS='|' read -a task <<< "$t"
-			notify-send "${task[0]}" "Due ${task[1]}"
+			echo "${t[0]} - Due ${t[1]}"
 		done
 	fi
 
