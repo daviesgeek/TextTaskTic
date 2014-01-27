@@ -68,10 +68,15 @@ while true; do
 		done
 	done
 
-	# Here, there's a list outstanding of tasks in $taskList
-	for t in "${taskList[@]}"; do
-		echo $t
-	done
+	# List outstanding of tasks is in $taskList
+	if [[ `uname` == 'Linux' ]]; then
+		notify-send "${#taskList[@]} outstanding tasks to complete"
+	elif [[ `uname` == 'Darwin' ]]; then
+		for t in "${taskList[@]}"; do
+			IFS='|' read -a task <<< "$t"
+			notify-send "${task[0]}" "Due ${task[1]}"
+		done
+	fi
 
 	sleep $((check*60))
 	break
