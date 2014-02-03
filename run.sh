@@ -11,7 +11,8 @@ while true; do
 	taskList=()
 
 	for f in "${files[@]}"; do
-		readarray text < $location/$f
+		IFS=$'\r\n'
+		text=($(cat "$location/$f"))
 		filekey=1
 		for l in "${text[@]}"; do
 			heading='^[[:space:]]?#'
@@ -20,8 +21,9 @@ while true; do
 			finished='@done'
 			if [[ $l =~ $task ]]; then
 				if [[ ! $l =~ $finished ]]; then
-					datetimeregex='@\d{2,4}-\d{1,2}-\d{1,2},\d{1,2}:\d{1,2}'
-					datetime=$( echo $l | grep -oP $datetimeregex)
+					datetimeregex='@[0-9]{2,4}-[0-9]{1,2}-[0-9]{1,2},[0-9]{1,2}:[0-9]{1,2}'
+					[[ $l =~ $datetimeregex ]]
+					datetime="${BASH_REMATCH[0]}"
 					datesave="$datetime"
 
 					IFS=',' read -a datetime <<< "$datetime"
